@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport({
     host: 'webmail.lacviet.com.vn',
     auth: {
         user: 'navan@lacviet.com.vn',
-        pass: 'Nav@5432112345'
+        pass: ''
     }, 
     use_authentication : true,    
     tls: { rejectUnauthorized: false },

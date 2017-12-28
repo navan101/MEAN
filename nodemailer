@@ -1,0 +1,36 @@
+var express = require('express');
+var nodemailer = require('nodemailer');
+var app = express();
+
+app.listen(3000);
+
+var transporter = nodemailer.createTransport({
+    host: 'webmail.lacviet.com.vn',
+    auth: {
+        user: 'navan@lacviet.com.vn',
+        pass: 'Nav@5432112345'
+    }, 
+    use_authentication : true,    
+    tls: { rejectUnauthorized: false },
+});
+
+var mailOptions = {
+    from: 'navan@lacviet.com.vn', // sender address
+    to: 'nlbinh@lacviet.com.vn', // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world?', // plain text body
+    html: '<b>Hello world?</b>' // html body
+};
+
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+});
+
